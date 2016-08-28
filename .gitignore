@@ -1,0 +1,43 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Java template
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+.gitignore
+.idea/
+http-consumer/.idea/
+http-consumer/http-consumer.iml
+http-consumer/target/
+http-interface/.idea/
+http-interface/http-interface.iml
+http-interface/src/main/resources/
+http-interface/src/test/
+http-interface/target/
+http-provider/.idea/
+http-provider/http-provider.iml
+http-provider/src/test/
+http-provider/target/
+http-rpc-core/.idea/
+http-rpc-core/http-rpc-core.iml
+http-rpc-core/src/main/resources/
+http-rpc-core/src/test/
+http-rpc-core/target/
+http-rpc.iml
+out/
