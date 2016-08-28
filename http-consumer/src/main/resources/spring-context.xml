@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+    <context:component-scan base-package="jin.study.rpc"/>
+    <context:annotation-config/>
+
+    <bean id="consumerConfig" class="jin.study.rpc.invoke.ConsumerConfig">
+        <property name="url" value="http://127.0.0.1:8888/invoke"/>
+    </bean>
+
+    <bean id="speakInterfaceInvoker" class="jin.study.rpc.proxy.ConsumerProxyFactory">
+        <property name="consumerConfig" ref="consumerConfig"/>
+        <property name="clazz" value="jin.study.rpc.SpeakInterface"/>
+    </bean>
+    <bean id="speakInterface" factory-bean="speakInterfaceInvoker" factory-method="create"/>
+</beans>
