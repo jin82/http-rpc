@@ -1,5 +1,6 @@
 package jin.study.rpc.proxy;
 
+import jin.study.rpc.exception.RpcException;
 import jin.study.rpc.invoke.ConsumerConfig;
 import jin.study.rpc.invoke.HttpInvoker;
 import jin.study.rpc.invoke.Invoker;
@@ -41,7 +42,18 @@ public class ConsumerProxyFactory implements InvocationHandler {
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 		Class interfaceClass = proxy.getClass().getInterfaces()[0];
 		String req = formater.reqFormat(interfaceClass,method.getName(),args[0]);
-		String resb = invoker .request(req,consumerConfig);
+		String resb = null;
+		int times = 0 ;
+		while (times++ < 2 && resb == null) {
+			try{
+				resb = invoker.request(req, consumerConfig.getUrl(interfaceClass));
+			}catch (RpcException e){
+				e.printStackTrace();
+			}
+		}
+		if (resb == null) {
+			invoker.request(req, consumerConfig.getUrl(interfaceClass));
+		}
 		return parser.rsbParse(resb);
 	}
 

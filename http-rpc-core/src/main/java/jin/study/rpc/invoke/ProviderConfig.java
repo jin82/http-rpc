@@ -1,5 +1,10 @@
 package jin.study.rpc.invoke;
 
+import jin.study.rpc.zookeeper.ZookeeperClient;
+
+import java.net.Inet4Address;
+import java.net.UnknownHostException;
+
 /**
  * \*
  * \* User: jin82
@@ -14,12 +19,33 @@ public class ProviderConfig {
 
 	private Integer port;
 
+	private ZookeeperClient zkClient;
+
 	public ProviderConfig() {
 	}
 
 	public ProviderConfig(String target, Integer port) {
 		this.target = target;
 		this.port = port;
+		if(target.toLowerCase().startsWith("zookeeper://")){
+			zkClient = new ZookeeperClient(target.toLowerCase().replaceFirst("zookeeper://", ""));
+		}
+	}
+
+	public void register(Class clazz) {
+		if (zkClient != null) {
+			zkClient.createPersistent("/rpc/" + clazz.getName().replaceAll("\\.", "/"));
+			zkClient.createEphemeral("/rpc/" + clazz.getName().replaceAll("\\.", "/") + "/node", getNodeInfo());
+		}
+	}
+
+	public String getNodeInfo() {
+		try {
+			return "http://"+Inet4Address.getLocalHost().getHostAddress()+":"+getPort();
+		}catch (UnknownHostException e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public String getTarget() {

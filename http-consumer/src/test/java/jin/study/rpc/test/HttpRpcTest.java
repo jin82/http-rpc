@@ -25,6 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath*:spring-*.xml"})
+
 public class HttpRpcTest {
 
 	@Resource

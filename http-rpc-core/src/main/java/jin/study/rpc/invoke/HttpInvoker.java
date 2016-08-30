@@ -35,8 +35,8 @@ public class HttpInvoker implements Invoker {
 	public static final Invoker invoker = new HttpInvoker();
 
 	@Override
-	public String request(String request, ConsumerConfig consumerConfig) throws RpcException {
-		HttpPost post = new HttpPost(consumerConfig.getUrl());
+	public String request(String request, String url) throws RpcException {
+		HttpPost post = new HttpPost(url);
 		post.setHeader("Connection","Keep-Alive");
 		List<NameValuePair> params = new ArrayList<>();
 		params.add(new BasicNameValuePair("data",request));

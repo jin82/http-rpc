@@ -18,11 +18,11 @@ public interface Invoker {
 	/**
 	 * 调用请求
 	 * @param request 请求报文
-	 * @param consumerConfig 消费者配置
+	 * @param url 请求url
 	 * @return
 	 * @throws RpcException
 	 */
-	String request(String request, ConsumerConfig consumerConfig) throws RpcException;
+	String request(String request, String url) throws RpcException;
 
 	/**
 	 * 请求应答
