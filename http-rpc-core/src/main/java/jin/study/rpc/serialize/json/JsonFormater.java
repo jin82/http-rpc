@@ -23,8 +23,7 @@ public class JsonFormater implements Formater {
 		request.setClazz(clazz);
 		request.setMethod(method);
 		request.setParam(param);
-		String a =  JSON.toJSONString(request, SerializerFeature.WriteClassName);
-		return  a;
+		return JSON.toJSONString(request, SerializerFeature.WriteClassName);
 	}
 
 	@Override
