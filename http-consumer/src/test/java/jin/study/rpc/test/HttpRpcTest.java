@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -26,7 +25,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath*:spring-*.xml"})
-
 public class HttpRpcTest {
 
 	@Resource
@@ -45,14 +43,10 @@ public class HttpRpcTest {
 		Date date = new Date();
 		for(int index=0; index<10000;index++){
 			final int NO=index + 1;//Cannot refer to a non-final variable NO inside an inner class defined in a different method
-			Runnable run=new Runnable(){
-				public void run()
-				{
-					logger.info(peopleController.getSpeak(new Random(100).nextInt()+"",new Random(1).nextInt()));
-					countDownLatch.countDown();
-				}
-			};
-			exec.submit(run);
+			exec.submit(()->{
+				logger.info(peopleController.getSpeak(NO+"",NO));
+				countDownLatch.countDown();
+			});
 		}
 		countDownLatch.await();
 		System.out.println(new Date().getTime() - date.getTime());

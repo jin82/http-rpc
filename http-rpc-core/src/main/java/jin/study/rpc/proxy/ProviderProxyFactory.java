@@ -74,7 +74,7 @@ public class ProviderProxyFactory extends AbstractHandler{
 		String reqStr = httpServletRequest.getParameter("data");
 		try{
 			Request rpcRequest = parser.reqParse(reqStr);
-			Object result = rpcRequest.invoke(getInstance().getBeanByClass(rpcRequest.getClass()));
+			Object result = rpcRequest.invoke(getInstance().getBeanByClass(rpcRequest.getClazz()));
 			invoker.response(formater.rsbFormat(result), httpServletResponse.getOutputStream());
 		}catch (RpcException e){
 			e.printStackTrace();

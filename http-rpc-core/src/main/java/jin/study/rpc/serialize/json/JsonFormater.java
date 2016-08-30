@@ -31,4 +31,18 @@ public class JsonFormater implements Formater {
 	public String rsbFormat(Object param) {
 		return JSON.toJSONString(param, SerializerFeature.WriteClassName);
 	}
+
+	public static void main(String[] args) {
+		String bar = "parpm";
+		Request request = new Request();
+		request.setClazz(String.class);
+		request.setMethod("foo");
+		request.setParam(bar);
+
+		String result = JSON.toJSONString(request);
+		String b =  JSON.toJSONString(request, SerializerFeature.WriteClassName);
+
+		System.out.println(result);
+		System.out.println(b );
+	}
 }
