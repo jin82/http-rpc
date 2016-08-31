@@ -1,5 +1,7 @@
 package jin.study.rpc;
 
+import java.io.Serializable;
+
 /**
  * \*
  * \* User: jin82
@@ -8,7 +10,7 @@ package jin.study.rpc;
  * \* Description:
  * \
  */
-public class People {
+public class People implements Serializable{
 
 	private String name;
 
